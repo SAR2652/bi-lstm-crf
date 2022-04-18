@@ -114,7 +114,7 @@ class Preprocessor:
         with open(file_path, encoding="utf8") as f:
             for idx, line in tqdm(enumerate(f), desc="parsing {}".format(file_path)):
                 fields = line.strip().split("\t")
-                print(fields)
+                print('Fields: {}'.format(fields))
                 if len(fields) != 2:
                     raise ValueError("format error in line {}, tabs count: {}".format(idx + 1, len(fields) - 1))
 
