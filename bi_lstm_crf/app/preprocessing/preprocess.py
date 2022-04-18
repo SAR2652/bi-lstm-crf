@@ -120,10 +120,11 @@ class Preprocessor:
 
                 sentence, tags = fields
                 try:
-                    print(sentence)
-                    print(tags)
+                    
                     if sentence[0] == "[":
                         sentence = json.loads(sentence)
+                    print(sentence)
+                    print(tags)
                     tags = json.loads(tags)
                     xs.append(self.sent_to_vector(sentence, max_seq_len=max_seq_len))
                     ys.append(self.tags_to_vector(tags, max_seq_len=max_seq_len))
