@@ -118,9 +118,9 @@ class Preprocessor:
                     raise ValueError("format error in line {}, tabs count: {}".format(idx + 1, len(fields) - 1))
 
                 sentence, tags = fields
-                print(sentence)
-                print(tags)
                 try:
+                    print(sentence)
+                    print(tags)
                     if sentence[0] == "[":
                         sentence = json.loads(sentence)
                     tags = json.loads(tags)
