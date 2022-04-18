@@ -2,6 +2,7 @@ from os.path import join, exists
 import numpy as np
 from tqdm import tqdm
 import torch
+import ast
 from bi_lstm_crf.app.preprocessing.utils import *
 
 FILE_VOCAB = "vocab.json"
@@ -114,7 +115,6 @@ class Preprocessor:
         with open(file_path, encoding="utf8") as f:
             for idx, line in tqdm(enumerate(f), desc="parsing {}".format(file_path)):
                 fields = line.strip().split("\t")
-                print('Fields: {}'.format(fields))
                 if len(fields) != 2:
                     raise ValueError("format error in line {}, tabs count: {}".format(idx + 1, len(fields) - 1))
 
@@ -123,9 +123,8 @@ class Preprocessor:
                     
                     if sentence[0] == "[":
                         sentence = json.loads(sentence)
-                    print(sentence)
-                    print(tags)
-                    tags = json.loads(tags)
+                    # tags = json.loads(tags)
+                    tags = ast.literal_eval(tags)
                     xs.append(self.sent_to_vector(sentence, max_seq_len=max_seq_len))
                     ys.append(self.tags_to_vector(tags, max_seq_len=max_seq_len))
                     if len(sentence) != len(tags):
